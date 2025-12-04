@@ -1,475 +1,739 @@
-
+<html ....>
 <html lang="th">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>School Weekly Planner - Cute Mockup</title>
+  <title>School Weekly Planner — โมบาย (Demo)</title>
 
-  <!-- Google Font Mali -->
+  <!-- Mali Font -->
   <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --purple-1:#EED9FF;
-      --purple-2:#D2B3FF;
-      --green-1:#E6FFE8;
-      --green-2:#BFFFD7;
-      --accent:#B192FF;
-      --paper:#FFFDF9;
-      --muted:#7B7B7B;
-      --text:#2F2F2F;
-      --card-radius:28px; /* rounded-3xl feel */
-      --glass-shadow: 0 8px 20px rgba(127,90,255,0.08);
-      --dot-size:2px;
+      --bg:#fffafc;
+      --accent-grad: linear-gradient(135deg,#d6c8ff 0%, #c8f0d6 100%);
+      --purple-pastel:#cfc0ff;
+      --green-pastel:#c8f0d6;
+      --primary:#8b5cf6;
+      --secondary:#34d399;
+      --muted:#9ca3af;
+      --card:#ffffff;
+      --note:#fff6f9;
+      --shadow: 0 8px 20px rgba(139,92,246,0.12);
+      --rounded: 18px;
+      font-family: "Mali", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
-    html,body{
-      height:100%;
+    /* Dot-grid background like notebook */
+    body{
       margin:0;
-      font-family: 'Mali', sans-serif;
-      background: linear-gradient(160deg, var(--purple-1) 0%, var(--green-1) 100%);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-    }
-
-    /* Dot grid paper effect */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background-image:
-        radial-gradient(var(--muted) 0.6px, transparent 0.7px);
+      background: radial-gradient(circle at 10px 10px, rgba(0,0,0,0.02) 1px, transparent 1px);
       background-size: 24px 24px;
-      opacity:0.06;
-      pointer-events:none;
-    }
-
-    .app {
-      max-width:1100px;
-      margin:32px auto;
-      padding:28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.96));
-      border-radius:34px;
-      box-shadow: var(--glass-shadow);
-      border: 1px solid rgba(160,140,255,0.08);
-    }
-
-    header{
+      background-color: var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color:#222;
+      min-height:100vh;
       display:flex;
       align-items:center;
-      gap:14px;
-      margin-bottom:18px;
+      justify-content:center;
+      padding:16px;
     }
 
-    .logo {
-      width:56px;height:56px;
-      background: linear-gradient(135deg,var(--purple-2),var(--green-2));
-      border-radius:14px;
-      display:flex;align-items:center;justify-content:center;
-      color:white;font-weight:700;font-size:20px;
-      box-shadow: 0 6px 14px rgba(110,80,255,0.12);
-    }
-
-    .title {
-      font-size:20px;
-      line-height:1;
-    }
-    .subtitle { font-size:12px;color:var(--muted);margin-top:4px; }
-
-    .top-cards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:16px;
-      margin-top:12px;
-    }
-
-    .card{
-      background: white;
-      padding:14px;
-      border-radius:var(--card-radius);
-      box-shadow: 0 6px 18px rgba(120,100,200,0.06);
-      border: 1px dashed rgba(180,160,255,0.08);
+    /* App frame (mobile) */
+    .app {
+      width: 390px;
+      max-width: calc(100% - 32px);
+      height: 812px;
+      max-height: calc(100vh - 32px);
+      background: var(--card);
+      border-radius: 28px;
+      box-shadow: 0 16px 36px rgba(16,24,40,0.15);
+      overflow: hidden;
       position:relative;
-      overflow:visible;
+      display:flex;
+      flex-direction:column;
     }
 
-    .washi {
+    /* Header with washi tape */
+    .app-header{
+      padding:18px 18px 8px 18px;
+      background: var(--accent-grad);
+      display:flex;
+      gap:12px;
+      align-items:center;
+      border-bottom-left-radius:18px;
+      border-bottom-right-radius:18px;
+      position:relative;
+    }
+    .washi{
       position:absolute;
-      left:12px;top:-8px;
-      width:80px;height:26px;
-      background: linear-gradient(90deg,#FFEFDB,#FFF4F8);
+      left:18px;
+      top:-8px;
+      width:120px;
+      height:30px;
+      background: linear-gradient(90deg,#ffd7e8,#fff4f8);
+      border-radius:10px;
       transform: rotate(-6deg);
-      border-radius:8px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.06);
-      display:flex;align-items:center;justify-content:center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
       font-size:12px;
+      color:#7c3aed;
+      font-weight:600;
+      z-index:2;
+      opacity:0.95;
+    }
+    .header-title{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .header-title h1{ margin:0; font-size:20px; }
+    .header-title p{ margin:0; font-size:12px; color:var(--muted); }
+
+    /* Floating search / quick actions */
+    .quick-actions{
+      margin-left:auto;
+      display:flex;
+      gap:8px;
+    }
+    .qa-btn{
+      background:rgba(255,255,255,0.7);
+      padding:8px;
+      border-radius:12px;
+      box-shadow: var(--shadow);
+      cursor:pointer;
+      font-size:18px;
     }
 
-    .card h3{ margin:0;font-size:15px; }
-    .muted { color:var(--muted); font-size:13px; margin-top:6px; }
-
-    /* week strip */
-    .week-strip{
-      margin-top:18px;
-      display:flex;gap:10px;align-items:center;
-      overflow:auto;padding-bottom:8px;
-    }
-    .day-pill{
-      min-width:92px;
-      padding:10px;border-radius:18px;
-      background: linear-gradient(180deg, #fff, #fafafa);
-      border:1px solid rgba(200,190,255,0.06);
-      display:flex;flex-direction:column;align-items:flex-start;gap:6px;
-    }
-    .day-pill .date { font-weight:600; font-size:14px; }
-    .dot{width:10px;height:10px;border-radius:50%;}
-    .tag { font-size:12px;padding:6px 8px;border-radius:999px;background:var(--purple-1); color:var(--text); }
-
-    /* activity cards within calendar */
-    .activity {
-      display:flex;gap:10px;align-items:center;
-      background: linear-gradient(90deg, rgba(210,179,255,0.18), rgba(191,255,215,0.1));
-      padding:8px;border-radius:14px;
-      border:1px solid rgba(180,150,255,0.08);
-    }
-    .activity .time { font-size:12px;color:var(--muted);min-width:56px; }
-    .activity .meta { font-size:13px;font-weight:600; }
-
-    .list {
-      margin-top:18px; display:grid; gap:12px;
+    /* Content (scrollable) */
+    .app-content{
+      padding:14px;
+      overflow:auto;
+      flex:1;
     }
 
-    /* floating nav */
-    .floating-nav {
-      position:fixed;
+    /* Cards */
+    .cards{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+      border-radius: 14px;
+      padding:12px;
+      box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+      border:1px solid rgba(139,92,246,0.06);
+      min-height:74px;
+    }
+    .card h3{ margin:0 0 6px 0; font-size:13px; }
+    .card p{ margin:0; font-size:12px; color:var(--muted); }
+
+    /* Weekly list (simpler calendar) */
+    .week-list{
+      margin-top:8px;
+    }
+    .day-row{
+      display:flex;
+      gap:8px;
+      align-items:flex-start;
+      padding:8px;
+      border-radius:12px;
+      margin-bottom:8px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,255,255,0.8));
+      border:1px dashed rgba(0,0,0,0.03);
+    }
+    .day-date{
+      width:68px;
+      font-size:13px;
+      text-align:center;
+      padding:6px;
+      border-radius:10px;
+      background:rgba(139,92,246,0.06);
+    }
+    .events{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .event{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:#fff;
+      padding:8px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 6px 12px rgba(16,24,40,0.04);
+      cursor:pointer;
+    }
+    .tag{
+      width:10px;height:10px;border-radius:4px;
+      flex-shrink:0;
+    }
+    .event .meta{ font-size:12px; color:var(--muted); }
+
+    /* Floating nav bottom */
+    .floating-nav{
+      position:absolute;
       left:50%;
       transform:translateX(-50%);
-      bottom:22px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.98));
+      bottom:18px;
+      width:92%;
+      max-width:720px;
+      height:64px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.9),#fff);
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:space-around;
+      box-shadow: 0 12px 26px rgba(16,24,40,0.12);
+      border:1px solid rgba(139,92,246,0.06);
       padding:8px 18px;
-      border-radius:40px;
-      box-shadow: 0 12px 30px rgba(120,90,200,0.12);
-      display:flex;gap:14px;align-items:center;
-      border:1px solid rgba(160,140,255,0.06);
+      z-index:5;
     }
-    .nav-item{ font-size:18px; padding:8px; border-radius:999px; cursor:pointer; color:var(--muted); }
-    .nav-item.active{ background: linear-gradient(90deg,var(--purple-2),var(--green-2)); color:white; box-shadow:0 6px 16px rgba(120,90,255,0.18); }
+    .nav-item{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:4px;
+      font-size:12px;
+      color:var(--muted);
+      cursor:pointer;
+      user-select:none;
+    }
+    .nav-item.active{ color:var(--primary); font-weight:600; }
 
-    /* small modal style */
-    .modal {
-      position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
-      background:white; padding:18px; border-radius:20px; width:90%; max-width:720px;
-      box-shadow: 0 20px 60px rgba(80,60,140,0.18);
-      display:none; z-index:120;
+    /* Modal / panels */
+    .panel{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+      z-index:50;
+      background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.24));
     }
-    .modal.open{ display:block; }
-    .modal .close { float:right; cursor:pointer; color:var(--muted) }
+    .panel.open{ display:flex; }
+    .sheet{
+      width:100%;
+      max-width:420px;
+      background:#fff;
+      border-top-left-radius:20px;
+      border-top-right-radius:20px;
+      padding:14px;
+      max-height:82%;
+      overflow:auto;
+      box-shadow: 0 -12px 30px rgba(16,24,40,0.12);
+    }
 
-    /* list styles */
-    .duties .done { opacity:0.6; text-decoration:line-through; }
+    /* Login screen */
+    .login{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+      padding:24px;
+    }
+    .login-card{
+      width:320px;
+      max-width: calc(100% - 48px);
+      padding:18px;
+      background:linear-gradient(180deg,#fff,#fff);
+      border-radius:20px;
+      box-shadow: var(--shadow);
+      border:1px solid rgba(139,92,246,0.06);
+    }
+    .input{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-bottom:12px;
+    }
+    .input input{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,0.06);
+      font-size:14px;
+      outline:none;
+    }
+    .btn{
+      padding:10px;
+      border-radius:12px;
+      background:linear-gradient(90deg,var(--purple-pastel),var(--green-pastel));
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      color:#3a076b;
+      box-shadow: 0 8px 18px rgba(139,92,246,0.12);
+    }
 
-    /* profile card */
-    .profile {
-      display:flex; gap:14px; align-items:center;
-    }
-    .avatar{
-      width:76px;height:76px;border-radius:18px;background:linear-gradient(135deg,var(--green-2),var(--purple-2));
-      color:white;display:flex;align-items:center;justify-content:center;font-weight:700;
-      box-shadow: 0 8px 20px rgba(110,80,255,0.08);
+    /* Tiny elements for list */
+    .small{ font-size:12px; color:var(--muted); }
+
+    /* badges for dress code */
+    .dress-badge{
+      padding:8px 10px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#fff,#fff);
+      border:1px solid rgba(0,0,0,0.04);
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      font-size:13px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.04);
     }
 
-    /* responsive */
-    @media (max-width:900px){
-      .top-cards { grid-template-columns: 1fr; }
-      .app{ margin:12px; padding:18px; border-radius:20px; }
-      .floating-nav{ bottom:12px; padding:8px 12px; }
+    /* Responsive for small screens */
+    @media (max-width:420px){
+      .app{ width:100%; height:100vh; border-radius:0; }
+      .washi{ left:8px; width:96px; }
+      .login-card{ width:92%; }
     }
+
   </style>
 </head>
 <body>
-  <div class="app" role="application" aria-label="School Weekly Planner">
-    <header>
-      <div class="logo">SWP</div>
-      <div>
-        <div class="title">School Weekly Planner ✨</div>
-        <div class="subtitle">สรุปกิจกรรมและหน้าที่ประจำสัปดาห์ของโรงเรียน</div>
-      </div>
-      <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
-        <button id="announceBtn" style="background:transparent;border:0;cursor:pointer;font-size:20px">📣</button>
-        <button id="notifBtn" style="background:transparent;border:0;cursor:pointer;font-size:20px">🔔</button>
-      </div>
-    </header>
 
-    <!-- Top cards -->
-    <div class="top-cards" aria-hidden="false">
-      <div class="card" id="todayCard">
-        <div class="washi">สรุปวันนี้</div>
-        <h3>กิจกรรมวันนี้ 🎉</h3>
-        <div class="muted">3 กิจกรรมสำคัญ</div>
-        <div style="margin-top:10px">
-          <div class="activity" style="margin-top:8px">
-            <div class="time">09:00</div>
-            <div class="meta">ประชุมครู <span style="margin-left:8px;font-size:12px;color:var(--muted)">ห้องประชุม</span></div>
-          </div>
-          <div class="activity" style="margin-top:8px">
-            <div class="time">13:30</div>
-            <div class="meta">ค่ายวิทยาศาสตร์ 🧪</div>
-          </div>
-        </div>
+  <div class="app" id="app">
+    <!-- Login Screen -->
+    <div id="screen-login" style="height:100%; display:flex; flex-direction:column;">
+      <div style="padding:32px 18px 0 18px;">
+        <div style="font-size:28px; font-weight:700; color:var(--primary);">School Weekly Planner ✨</div>
+        <div style="margin-top:6px; font-size:13px; color:var(--muted);">แอปสำหรับครู — วางแผนงานประจำสัปดาห์</div>
       </div>
 
-      <div class="card" style="background: linear-gradient(180deg,var(--green-1),#ffffff);">
-        <div class="washi">หน้าที่</div>
-        <h3>หน้าที่วันนี้ ✅</h3>
-        <div class="muted">คุณครู A มี 2 หน้าที่</div>
-        <div class="duties list" style="margin-top:10px">
-          <div class="activity" style="justify-content:space-between">
-            <div><div style="font-weight:700">เวรรับฝากเงิน (School Bank)</div><div style="font-size:12px;color:var(--muted)">07:30 - 08:15</div></div>
-            <div><button class="confirmBtn" data-id="d1">ยืนยัน ✓</button></div>
-          </div>
-
-          <div class="activity" style="justify-content:space-between">
-            <div><div style="font-weight:700">ตรวจแผนการสอน (Academic)</div><div style="font-size:12px;color:var(--muted)">ก่อน 12:00</div></div>
-            <div><button class="confirmBtn" data-id="d2">ยืนยัน ✓</button></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="washi">แต่งกาย</div>
-        <h3>การแต่งกายวันนี้ 👗</h3>
-        <div class="muted">ชุดนักเรียน — เสื้อเชิ้ตขาว / กระโปรงกรมท่า</div>
-        <div style="margin-top:10px; display:flex;gap:10px;align-items:center;">
-          <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#FFF5F0,#FFE7F6);display:flex;align-items:center;justify-content:center;font-size:26px">👔</div>
-          <div style="font-size:13px;">ตรวจเครื่องแบบตามประกาศโรงเรียน</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Week strip -->
-    <div class="week-strip" aria-hidden="false" style="margin-top:18px">
-      <!-- Example day pills -->
-      <div class="day-pill">
-        <div class="date">จ. 8 ธ.ค.</div>
-        <div class="muted">2 กิจกรรม</div>
-        <div style="display:flex;gap:6px;margin-top:6px">
-          <div class="dot" style="background:var(--purple-2)"></div>
-          <div class="dot" style="background:var(--green-2)"></div>
-        </div>
-      </div>
-
-      <div class="day-pill">
-        <div class="date">อ. 9 ธ.ค.</div>
-        <div class="muted">1 กิจกรรม</div>
-        <div style="display:flex;gap:6px;margin-top:6px">
-          <div class="dot" style="background:#FFD1EA"></div>
-        </div>
-      </div>
-
-      <div class="day-pill">
-        <div class="date">พ. 10 ธ.ค.</div>
-        <div class="muted">ไม่มี</div>
-        <div style="height:18px"></div>
-      </div>
-    </div>
-
-    <!-- Main list: announcements & calendar -->
-    <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px">
-      <section>
-        <h3 style="margin:0 0 10px 0">ปฏิทินสัปดาห์นี้ 📆</h3>
-
-        <div style="background:white;padding:12px;border-radius:20px;border:1px solid rgba(180,160,255,0.05)">
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div class="activity">
-              <div class="time">09:00</div>
-              <div class="meta">ประชุมครูประจำสัปดาห์</div>
-            </div>
-            <div class="activity">
-              <div class="time">11:00</div>
-              <div class="meta">คณะกรรมการทางวิชาการ</div>
-            </div>
-            <div class="activity">
-              <div class="time">13:30</div>
-              <div class="meta">ค่ายวิทยาศาสตร์ (Lab)</div>
-            </div>
-          </div>
-        </div>
-
-        <h3 style="margin:18px 0 8px 0">ประกาศล่าสุด 📣</h3>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="card" style="padding:12px">
-            <div style="display:flex;align-items:center;gap:10px">
-              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(90deg,#FFF2F9,#F2FFF7);display:flex;align-items:center;justify-content:center;">📌</div>
-              <div>
-                <div style="font-weight:700">แจ้งกำหนดการชุมนุมพิเศษ</div>
-                <div class="muted">ประกาศโดย ผู้บริหาร • 1 วันก่อนหน้า</div>
-              </div>
-            </div>
-            <div class="muted" style="margin-top:8px">กรุณาเตรียมเอกสารและแบบฟอร์มการอนุญาตนักเรียนก่อนวันที่ 12 ธ.ค.</div>
-          </div>
-
-          <div class="card" style="padding:12px">
-            <div style="display:flex;align-items:center;gap:10px">
-              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(90deg,#FFF7E6,#E8F8FF);display:flex;align-items:center;justify-content:center;">📎</div>
-              <div>
-                <div style="font-weight:700">อัปเดตแบบฟอร์ม SGS</div>
-                <div class="muted">ประกาศโดย เจ้าหน้าที่ทะเบียน • 3 วันก่อนหน้า</div>
-              </div>
-            </div>
-            <div class="muted" style="margin-top:8px">ครูผู้สอนโปรดอัปโหลดผลคะแนนลง SGS ภายในสิ้นเดือน</div>
-          </div>
-        </div>
-
-      </section>
-
-      <aside>
-        <div class="card" style="padding:12px">
-          <h4 style="margin-top:0">โปรไฟล์ครู 👩‍🏫</h4>
-          <div class="profile">
-            <div class="avatar">KA</div>
+      <div class="login" style="flex:1;">
+        <div class="login-card">
+          <div style="display:flex; gap:10px; align-items:center; margin-bottom:12px;">
+            <div style="width:56px; height:56px; border-radius:12px; background:var(--purple-pastel); display:flex; align-items:center; justify-content:center; font-size:28px;">📒</div>
             <div>
-              <div style="font-weight:700">คุณครู กาญจนา</div>
-              <div class="muted">ครูวิทยาศาสตร์ • ห้อง 304</div>
-              <div style="margin-top:8px;font-size:13px">หน้าที่ประจำ: สอนวิทยาศาสตร์ ม.2</div>
+              <div style="font-weight:700;">เข้าสู่ระบบครู</div>
+              <div style="font-size:12px; color:var(--muted);">กรุณาใส่อีเมลและรหัสผ่านเพื่อเข้าใช้งาน</div>
             </div>
           </div>
-          <div style="margin-top:12px">
-            <button id="viewProfile" style="background:var(--accent);border:0;padding:8px 12px;border-radius:12px;color:white;cursor:pointer">ดูโปรไฟล์</button>
+
+          <div class="input">
+            <label class="small">อีเมล</label>
+            <input id="login-email" placeholder="you@school.edu" />
+            <label class="small">รหัสผ่าน</label>
+            <input id="login-pass" type="password" placeholder="••••••••" />
+          </div>
+          <button class="btn" id="btn-login">เข้าสู่ระบบ</button>
+
+          <div style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center;">
+            ทดลองใช้งานด้วยบัญชีตัวอย่าง: demo@school / demo123
           </div>
         </div>
 
-        <div class="card" style="margin-top:12px;padding:12px">
-          <h4 style="margin:0 0 8px 0">แจ้งเตือนล่วงหน้า 🔔</h4>
-          <div class="muted">ไม่มีการแจ้งเตือนใหม่</div>
-          <div style="margin-top:12px">
-            <button id="testNotif" style="background:linear-gradient(90deg,var(--purple-2),var(--green-2));border:0;padding:8px 12px;border-radius:12px;color:white;cursor:pointer">ทดสอบแจ้งเตือน</button>
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <!-- modal: activity detail -->
-    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <div style="font-weight:700">รายละเอียดกิจกรรม</div>
-        <div class="close" onclick="closeModal()">✖️</div>
-      </div>
-      <div style="margin-top:10px">
-        <div class="muted">ประชุมครู — ห้องประชุมใหญ่ • 09:00 - 10:30</div>
-        <div style="margin-top:8px">รายละเอียด: ประชุมเตรียมงานกิจกรรมปลายภาค และสรุปผลการเรียน</div>
-
-        <h4 style="margin-top:12px">Checklist เตรียมของ</h4>
-        <ul>
-          <li><input type="checkbox" id="c1"> เอกสารวาระประชุม</li>
-          <li><input type="checkbox"> โปรเจคเตอร์</li>
-          <li><input type="checkbox"> แบบประเมิน</li>
-        </ul>
-
-        <h4 style="margin-top:8px">การแต่งกาย</h4>
-        <div>👔 ชุดสูท/เชิ้ต หรือชุดข้าราชการครูตามประกาศ</div>
-        <div style="margin-top:10px">
-          <button style="background:var(--green-2);border:0;padding:8px 12px;border-radius:12px;cursor:pointer" onclick="confirmActivity()">ยืนยันทำแล้ว</button>
+        <div style="font-size:12px; color:var(--muted); margin-top:12px; text-align:center;">
+          ดีไซน์: สมุดจดน่ารัก (Mali, ดอกจุด, washi tape) 🧾💜
         </div>
       </div>
     </div>
 
+    <!-- Main App (hidden until login) -->
+    <div id="screen-main" style="display:none; height:100%; flex-direction:column;">
+      <div class="app-header">
+        <div class="washi">Weekly Notes</div>
+        <div style="width:48px; height:48px; border-radius:12px; background:linear-gradient(90deg,var(--purple-pastel),#fff); display:flex; align-items:center; justify-content:center; font-size:22px;">🏫</div>
+        <div class="header-title">
+          <h1 id="welcome-title">สวัสดี ครูสมมติ 😊</h1>
+          <p id="week-range" class="small">สัปดาห์: 1 ธ.ค. 2025 - 7 ธ.ค. 2025</p>
+        </div>
+        <div class="quick-actions">
+          <div class="qa-btn" title="ประกาศ" id="open-ann">📣</div>
+          <div class="qa-btn" title="แจ้งเตือน" id="open-rem">🔔</div>
+        </div>
+      </div>
+
+      <div class="app-content">
+        <!-- Top cards -->
+        <div class="cards">
+          <div class="card" id="card-today">
+            <h3>กิจกรรมวันนี้ • 2 รายการ</h3>
+            <p id="today-events">08:00 - พิธีเช้า (สนาม) • คุณครูใหญ่ 🎉<br/>10:00 - ประชุมคณะครู (ห้องประชุม) • คณะบริหาร</p>
+          </div>
+          <div class="card" id="card-duty">
+            <h3>หน้าที่วันนี้ • เวรเช้า</h3>
+            <p id="today-duty">งาน: เวรรับฝากเงินนักเรียน (School Bank) — ยืนยันสถานะ</p>
+          </div>
+          <div class="card" id="card-dress" style="grid-column: span 2;">
+            <h3>การแต่งกายวันนี้</h3>
+            <div style="display:flex; gap:10px; align-items:center; margin-top:6px;">
+              <div class="dress-badge">🎽 ชุดกีฬา</div>
+              <div style="flex:1; font-size:13px; color:var(--muted);">อ้างอิง: ประกาศ โรงเรียน ลงวันที่ 2025-11-25</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly list -->
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <div style="font-weight:700;">ปฏิทินสัปดาห์นี้</div>
+            <div style="font-size:12px; color:var(--muted);">แท็ก: 🟣 ประชุม 🟢 กีฬา 🔵 วิชาการ 🟡 พิธี</div>
+          </div>
+
+          <div class="week-list" id="week-list">
+            <!-- JS will inject day rows -->
+          </div>
+        </div>
+
+        <!-- Quick sections -->
+        <div style="margin-top:10px; display:flex; gap:10px;">
+          <div style="flex:1;" class="card">
+            <h3>ประกาศล่าสุด</h3>
+            <p id="latest-ann" class="small">📢 ระบบทำความสะอาดสนามแข่งขัน วันศุกร์นี้ 14:00 — ลงชื่อได้ที่หน้า "ประกาศ"</p>
+          </div>
+          <div style="width:120px;" class="card">
+            <h3>สถานะงาน</h3>
+            <p id="status-summary" class="small">งานที่ยืนยัน: 3/5</p>
+          </div>
+        </div>
+
+        <!-- Hidden panels triggered by nav -->
+        <div id="panel-container"></div>
+      </div>
+
+      <!-- Floating nav -->
+      <div class="floating-nav" role="navigation" aria-label="Navigation">
+        <div class="nav-item active" data-panel="dashboard">🏠<div>Dashboard</div></div>
+        <div class="nav-item" data-panel="calendar">📆<div>Calendar</div></div>
+        <div class="nav-item" data-panel="duties">📝<div>Duties</div></div>
+        <div class="nav-item" data-panel="dress">👔<div>Dress</div></div>
+        <div class="nav-item" data-panel="profile">👩‍🏫<div>Profile</div></div>
+      </div>
+    </div>
   </div>
 
-  <div class="floating-nav" role="navigation" aria-label="เมนูหลัก">
-    <div class="nav-item active" title="Home">🏠</div>
-    <div class="nav-item" title="Calendar">📆</div>
-    <div class="nav-item" title="Duties">✅</div>
-    <div class="nav-item" title="Dress">👗</div>
-    <div class="nav-item" title="Announce">📣</div>
-    <div class="nav-item" title="Profile">👩‍🏫</div>
+  <!-- Panels (modals) -->
+  <div id="panel-sheet" class="panel" aria-hidden="true">
+    <div class="sheet" id="sheet-body">
+      <!-- Injected content -->
+      <div style="text-align:center; font-weight:700; margin-bottom:8px;">รายละเอียด</div>
+      <div id="sheet-content" style="font-size:13px; color:var(--muted);"></div>
+      <div style="height:18px;"></div>
+      <div style="display:flex; gap:8px; justify-content:flex-end;">
+        <button class="btn" id="sheet-close" style="background:linear-gradient(90deg,#ffe7f3,#e9fff2); color:#6b2177;">ปิด</button>
+      </div>
+    </div>
   </div>
 
   <script>
-    // Sample interactive behaviors for mockup
-    document.querySelectorAll('.confirmBtn').forEach(btn=>{
-      btn.addEventListener('click', (e)=>{
-        const id = e.target.dataset.id;
-        e.target.textContent = '✔️ ยืนยันแล้ว';
-        e.target.disabled = true;
-        e.target.style.opacity = 0.7;
-        // Save locally (demo)
-        localStorage.setItem('duty-'+id, JSON.stringify({done:true, at:Date.now()}));
-        alert('บันทึกการยืนยันหน้าที่เรียบร้อย 🎉');
+    /*******************************
+     * Demo data (in-memory / localStorage)
+     *******************************/
+    const demoUser = {
+      id: "tch-001",
+      name: "ครูสายฝน",
+      role: "teacher",
+      email: "demo@school",
+      duties: [
+        // today's duty sample
+      ]
+    };
+
+    // Sample week data: array of days with events
+    const WEEK = getThisWeekDates();
+    const sampleEvents = [
+      { id:1, day:WEEK[0], time:"08:00", title:"พิธีเช้า", place:"สนาม", owner:"ผอ.", tag:"ceremony", tagEmoji:"🟡" },
+      { id:2, day:WEEK[0], time:"10:00", title:"ประชุมคณะครู", place:"ห้องประชุม", owner:"ฝ่ายบริหาร", tag:"meeting", tagEmoji:"🟣" },
+      { id:3, day:WEEK[1], time:"09:00", title:"คัดเลือกนักกีฬา", place:"สนาม", owner:"ครูพลศึกษา", tag:"sports", tagEmoji:"🟢" },
+      { id:4, day:WEEK[2], time:"13:00", title:"อบรมวิชาการ", place:"ห้องปฏิบัติการ", owner:"ฝ่ายวิชาการ", tag:"academic", tagEmoji:"🔵" },
+      { id:5, day:WEEK[4], time:"07:30", title:"เวรรับฝากเงินนักเรียน", place:"ธนาคารโรงเรียน", owner:"คุณครูสมชาย", tag:"bank", tagEmoji:"🟣" }
+    ];
+
+    // Sample duties (including the 3 special tasks)
+    const DUTIES = [
+      { id:"d1", title:"เวรรับฝากเงินนักเรียน (School Bank)", type:"School Bank", assignedTo:"tch-001", date: WEEK[4], time:"07:30", status:"pending" },
+      { id:"d2", title:"ตรวจสอบและส่งแผนการสอน (Academic)", type:"Academic", assignedTo:"tch-001", date: WEEK[2], time:"16:00", status:"submitted" },
+      { id:"d3", title:"กรอกคะแนนเก็บลงระบบ SGS (Registration/Measurement)", type:"Registration/Measurement", assignedTo:"tch-002", date: WEEK[3], time:"12:00", status:"pending" }
+    ];
+
+    // Announcements
+    const ANNS = [
+      { id:"a1", title:"ประชาสัมพันธ์: ทำความสะอาดสนาม", date:"2025-11-25", content:"สนามจะปิดทำความสะอาดวันศุกร์ 14:00 - 16:00" },
+      { id:"a2", title:"ประกาศ: แต่งกายวันกีฬา", date:"2025-11-24", content:"ครูทุกท่านสวมชุดกีฬาในวันศุกร์นี้" }
+    ];
+
+    // Dress code rules
+    const DRESS = [
+      { id:"dr1", date:WEEK[0], code:"ชุดนักเรียน", icon:"👔", ref:"ประกาศ 2025-11-01" },
+      { id:"dr2", date:WEEK[1], code:"ชุดกีฬา", icon:"🎽", ref:"ประกาศ 2025-11-20" },
+      { id:"dr3", date:WEEK[2], code:"ชุดทางการ", icon:"🕴️", ref:"ประกาศ 2025-10-15" },
+    ];
+
+    // Reminders (in-app)
+    const REMINDERS = [
+      { id:"r1", when: new Date(Date.now() + 1000*60*60*6).toISOString(), title:"เตรียมเอกสารสำหรับประชุม", note:"เอกสารตารางสอน 3 ชุด" }
+    ];
+
+    /*******************************
+     * Helper functions
+     *******************************/
+    function getThisWeekDates(){
+      const d = new Date();
+      // make Monday as start
+      const day = d.getDay() || 7;
+      const monday = new Date(d); monday.setDate(d.getDate() - day + 1);
+      const days = [];
+      for(let i=0;i<7;i++){
+        const dd = new Date(monday); dd.setDate(monday.getDate()+i);
+        days.push(dd.toISOString().slice(0,10));
+      }
+      return days;
+    }
+
+    function formatDateShort(iso){
+      const dt = new Date(iso);
+      return dt.getDate()+"/"+(dt.getMonth()+1);
+    }
+
+    function tagColor(tag){
+      switch(tag){
+        case "meeting": return "#c7b3ff";
+        case "sports": return "#b9f0d2";
+        case "academic": return "#bfdbff";
+        case "ceremony": return "#fff1b8";
+        case "bank": return "#ffd6e8";
+        default: return "#eee";
+      }
+    }
+
+    /*******************************
+     * Render functions
+     *******************************/
+    function renderWeekList(){
+      const container = document.getElementById("week-list");
+      container.innerHTML = "";
+      WEEK.forEach((isoDate, idx) => {
+        const dayEvents = sampleEvents.filter(e => e.day === isoDate);
+        const dayDiv = document.createElement("div");
+        dayDiv.className = "day-row";
+        dayDiv.innerHTML = `
+          <div class="day-date">
+            <div style="font-weight:700;">${["จ","อ","พ","พฤ","ศ","ส","อา"][idx]}</div>
+            <div class="small">${formatDateShort(isoDate)}</div>
+          </div>
+          <div class="events" id="events-${idx}"></div>
+        `;
+        container.appendChild(dayDiv);
+        const eventsDiv = dayDiv.querySelector(`#events-${idx}`);
+        if(dayEvents.length === 0){
+          eventsDiv.innerHTML = `<div class="small" style="padding:8px;">ไม่มีเหตุการณ์</div>`;
+        } else {
+          dayEvents.forEach(ev=>{
+            const evEl = document.createElement("div");
+            evEl.className = "event";
+            evEl.innerHTML = `
+              <div class="tag" style="background:${tagColor(ev.tag)}"></div>
+              <div style="flex:1">
+                <div style="font-weight:700;">${ev.time} — ${ev.title} ${ev.tagEmoji || ""}</div>
+                <div class="meta">${ev.place} • ผู้รับผิดชอบ: ${ev.owner}</div>
+              </div>
+              <div style="font-size:14px; color:var(--muted)">›</div>
+            `;
+            evEl.addEventListener("click",()=> openEventSheet(ev));
+            eventsDiv.appendChild(evEl);
+          });
+        }
+      });
+    }
+
+    function openEventSheet(ev){
+      const sheet = document.getElementById("panel-sheet");
+      const content = document.getElementById("sheet-content");
+      content.innerHTML = `
+        <div style="font-weight:800; font-size:16px;">${ev.title} ${ev.tagEmoji || ""}</div>
+        <div class="small" style="margin-top:6px;">วัน: ${ev.day} • เวลา: ${ev.time}</div>
+        <div style="margin-top:8px;">สถานที่: <b>${ev.place}</b></div>
+        <div style="margin-top:8px;">ผู้รับผิดชอบ: <b>${ev.owner}</b></div>
+        <div style="margin-top:12px;"><button class="btn" id="confirm-duty">ยืนยันการทำงาน/เข้าร่วม</button></div>
+      `;
+      sheet.classList.add("open");
+      document.getElementById("sheet-close").focus();
+
+      document.getElementById("confirm-duty").addEventListener("click",()=>{
+        // mark as confirmed in localStorage history
+        const hist = JSON.parse(localStorage.getItem("confirmed")||"[]");
+        hist.push({eventId:ev.id, timestamp:new Date().toISOString(), user:demoUser.id});
+        localStorage.setItem("confirmed", JSON.stringify(hist));
+        alert("บันทึกการยืนยันแล้ว ✅");
+        sheet.classList.remove("open");
+        renderStatusSummary();
+      });
+    }
+
+    function renderTopCards(){
+      // today events
+      const today = new Date().toISOString().slice(0,10);
+      const todayEvents = sampleEvents.filter(e => e.day === today);
+      document.getElementById("today-events").innerHTML = todayEvents.length ? todayEvents.map(e=>`${e.time} - ${e.title} (${e.place}) • ${e.owner}`).join("<br/>") : "วันนี้ไม่มีเหตุการณ์";
+      // today's duty - find duties for today
+      const todayDuty = DUTIES.find(d=>d.assignedTo===demoUser.id && d.date === today);
+      document.getElementById("today-duty").innerText = todayDuty ? `${todayDuty.title} — สถานะ: ${todayDuty.status}` : "ไม่มีหน้าที่ประจำวันนี้";
+    }
+
+    function renderAnnouncements(){
+      document.getElementById("latest-ann").innerText = (ANNS[0] && `📢 ${ANNS[0].title} — ${ANNS[0].content}`) || "ไม่มีประกาศใหม่";
+    }
+
+    function renderStatusSummary(){
+      const confirmed = JSON.parse(localStorage.getItem("confirmed")||"[]");
+      const total = DUTIES.filter(d=>d.assignedTo===demoUser.id).length;
+      const done = confirmed.filter(c=> {
+        const d = DUTIES.find(x => x.id == ("e"+c.eventId) || x.id==c.eventId);
+        return !!d || true; // for demo count any confirmation
+      }).length;
+      document.getElementById("status-summary").innerText = `งานที่ยืนยัน: ${done}/${total || 1}`;
+    }
+
+    /*******************************
+     * Login / Navigation
+     *******************************/
+    document.getElementById("btn-login").addEventListener("click", ()=>{
+      const email = document.getElementById("login-email").value || "";
+      const pass = document.getElementById("login-pass").value || "";
+      if(!email && !pass){
+        // demo login
+        startApp(demoUser);
+      } else {
+        // very basic demo auth
+        if(email.includes("@") && pass.length>=4){
+          demoUser.email = email;
+          startApp(demoUser);
+        } else {
+          alert("โปรดใส่อีเมลและรหัสผ่านที่ถูกต้อง (ตัวอย่าง demo@school / demo123)");
+        }
+      }
+    });
+
+    function startApp(user){
+      document.getElementById("screen-login").style.display = "none";
+      document.getElementById("screen-main").style.display = "flex";
+      document.getElementById("welcome-title").innerText = `สวัสดี ${user.name} 😊`;
+      // set week range
+      const weekRange = `${formatDateShort(WEEK[0])} - ${formatDateShort(WEEK[6])}`;
+      document.getElementById("week-range").innerText = `สัปดาห์: ${weekRange}`;
+      renderWeekList();
+      renderTopCards();
+      renderAnnouncements();
+      renderStatusSummary();
+    }
+
+    // nav items
+    document.querySelectorAll(".nav-item").forEach(item=>{
+      item.addEventListener("click", ()=>{
+        document.querySelectorAll(".nav-item").forEach(i=>i.classList.remove("active"));
+        item.classList.add("active");
+        openPanel(item.dataset.panel);
       });
     });
 
-    // Modal open (simulate clicking activity)
-    document.querySelectorAll('.activity').forEach((el, idx)=>{
-      el.addEventListener('click', (ev)=>{
-        // ignore clicks on confirm buttons
-        if(ev.target.tagName.toLowerCase() === 'button') return;
-        openModal();
-      });
+    // quick actions
+    document.getElementById("open-ann").addEventListener("click", ()=> openPanel("announcements"));
+    document.getElementById("open-rem").addEventListener("click", ()=> openPanel("reminders"));
+
+    // sheet close
+    document.getElementById("sheet-close").addEventListener("click", ()=> {
+      document.getElementById("panel-sheet").classList.remove("open");
     });
 
-    function openModal(){
-      const m = document.getElementById('modal');
-      m.classList.add('open');
-      m.setAttribute('aria-hidden','false');
-    }
-    function closeModal(){
-      const m = document.getElementById('modal');
-      m.classList.remove('open');
-      m.setAttribute('aria-hidden','true');
-    }
-
-    function confirmActivity(){
-      alert('ยืนยันการทำกิจกรรมแล้ว ✅ (ตัวอย่าง mockup)');
-      closeModal();
-    }
-
-    // Floating nav click demo
-    document.querySelectorAll('.nav-item').forEach((n,i)=>{
-      n.addEventListener('click', ()=>{
-        document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
-        n.classList.add('active');
-        // Could route to different views; here show alert for demo
-        const labels = ['หน้าแรก','ปฏิทิน','หน้าที่','การแต่งกาย','ประกาศ','โปรไฟล์'];
-        alert('ไปยัง: ' + labels[i] + ' (ตัวอย่าง)');
-      });
-    });
-
-    // Notification demo (Browser)
-    document.getElementById('testNotif').addEventListener('click', async ()=>{
-      if(!("Notification" in window)){
-        alert('เบราว์เซอร์ไม่รองรับ Notifications API');
+    function openPanel(name){
+      const sheet = document.getElementById("panel-sheet");
+      const content = document.getElementById("sheet-content");
+      content.innerHTML = ""; // reset
+      if(name==="dashboard"){
+        sheet.classList.remove("open");
         return;
       }
-      if(Notification.permission === 'default') {
-        await Notification.requestPermission();
-      }
-      if(Notification.permission === 'granted'){
-        new Notification('เตือนความจำจาก School Planner', {
-          body: 'เตือน: ประชุมครู 09:00 วันนี้ 🎉',
-          icon: ''
+      if(name==="calendar"){
+        content.innerHTML = `<div style="font-weight:800;">ปฏิทินรายสัปดาห์</div>`;
+        WEEK.forEach((d,idx)=>{
+          const events = sampleEvents.filter(e=>e.day===d);
+          content.innerHTML += `<div style="margin-top:8px; font-weight:700;">${["จ","อ","พ","พฤ","ศ","ส","อา"][idx]} ${formatDateShort(d)}</div>`;
+          if(events.length===0) content.innerHTML += `<div class="small">ไม่มีเหตุการณ์</div>`;
+          events.forEach(ev=>{
+            content.innerHTML += `<div style="margin-top:6px; padding:8px; border-radius:12px; background:#fff; border:1px solid #eee;">${ev.time} — <b>${ev.title}</b> • ${ev.place}</div>`;
+          });
+        });
+      } else if(name==="duties"){
+        content.innerHTML = `<div style="font-weight:800;">กำหนดหน้าที่</div><div class="small" style="margin-top:6px;">งานประจำ / งานพิเศษ</div>`;
+        DUTIES.forEach(d=>{
+          content.innerHTML += `
+            <div style="margin-top:8px; padding:8px; border-radius:12px; background:#fff; border:1px solid #eee;">
+              <div style="font-weight:700;">${d.title}</div>
+              <div class="small">${d.date} • ${d.time} • สถานะ: ${d.status}</div>
+              <div style="margin-top:6px; display:flex; gap:8px; justify-content:flex-end;">
+                ${d.assignedTo === demoUser.id ? `<button class="btn" onclick="confirmDuty('${d.id}')">ยืนยันแล้ว</button>` : ""}
+              </div>
+            </div>`;
+        });
+      } else if(name==="dress"){
+        content.innerHTML = `<div style="font-weight:800;">การแต่งกายวันนี้</div><div class="small" style="margin-top:6px;">อ้างอิงจากประกาศโรงเรียน</div>`;
+        DRESS.forEach(dd=>{
+          content.innerHTML += `<div style="margin-top:8px;" class="dress-badge">${dd.icon} ${dd.code} <span class="small" style="margin-left:8px; color:var(--muted);">• ${dd.ref}</span></div>`;
+        });
+      } else if(name==="profile"){
+        content.innerHTML = `<div style="font-weight:800;">โปรไฟล์ครู</div>`;
+        content.innerHTML += `<div style="margin-top:8px;"><b>${demoUser.name}</b> • ${demoUser.role}</div>`;
+        content.innerHTML += `<div class="small" style="margin-top:8px;">หน้าที่ประจำ: ครูประจำชั้น / งานพิเศษ: เวรธนาคาร, ตรวจแผนการสอน</div>`;
+        const confirmed = JSON.parse(localStorage.getItem("confirmed")||"[]");
+        content.innerHTML += `<div style="margin-top:10px; font-weight:700;">ประวัติการยืนยันการทำงาน</div>`;
+        content.innerHTML += confirmed.length ? confirmed.map(c=>`<div class="small">• ยืนยันเมื่อ ${new Date(c.timestamp).toLocaleString()}</div>`).join("") : `<div class="small">ยังไม่มีประวัติ</div>`;
+      } else if(name==="announcements"){
+        content.innerHTML = `<div style="font-weight:800;">ประกาศสำคัญ</div>`;
+        ANNS.forEach(a=>{
+          content.innerHTML += `<div style="margin-top:8px; padding:8px; border-radius:12px; background:#fff; border:1px solid #eee;">
+            <div style="font-weight:700;">${a.title}</div>
+            <div class="small">${a.date}</div>
+            <div style="margin-top:6px;" class="small">${a.content}</div>
+          </div>`;
+        });
+      } else if(name==="reminders"){
+        content.innerHTML = `<div style="font-weight:800;">แจ้งเตือน</div>`;
+        REMINDERS.forEach(r=>{
+          content.innerHTML += `<div style="margin-top:8px; padding:8px; border-radius:12px; background:#fff; border:1px solid #eee;">
+            <div style="font-weight:700;">${r.title}</div>
+            <div class="small">${new Date(r.when).toLocaleString()}</div>
+            <div style="margin-top:6px;" class="small">${r.note}</div>
+          </div>`;
         });
       } else {
-        alert('อนุญาตการแจ้งเตือนในเบราว์เซอร์เพื่อรับ notifications จริง');
+        content.innerHTML = `<div>ไม่พบหน้าที่เลือก</div>`;
       }
-    });
+      sheet.classList.add("open");
+    }
 
-    // Announcement btn opens modal with simple message
-    document.getElementById('announceBtn').addEventListener('click', ()=>{
-      alert('ประกาศล่าสุด: โปรดเตรียมเอกสารสำหรับค่ายวิทย์ 📎');
-    });
+    function confirmDuty(did){
+      const d = DUTIES.find(x=>x.id===did);
+      if(!d) return;
+      d.status = "completed";
+      const hist = JSON.parse(localStorage.getItem("confirmed")||"[]");
+      hist.push({eventId:did, timestamp:new Date().toISOString(), user:demoUser.id});
+      localStorage.setItem("confirmed", JSON.stringify(hist));
+      alert("บันทึกสถานะงานว่า 'ทำแล้ว' ✅");
+      renderStatusSummary();
+      openPanel("duties");
+    }
 
-    document.getElementById('notifBtn').addEventListener('click', ()=>{
-      alert('ไม่มีแจ้งเตือนใหม่ 🎈');
-    });
+    // Initialize demo (keep login visible until user clicks)
+    // pre-populate some localStorage
+    if(!localStorage.getItem("confirmed")){
+      localStorage.setItem("confirmed", JSON.stringify([]));
+    }
 
-    document.getElementById('viewProfile').addEventListener('click', ()=>{
-      alert('เปิดหน้าโปรไฟล์ (ตัวอย่าง mockup) 👩‍🏫');
-    });
+    // Expose some functions to window for inline buttons
+    window.confirmDuty = confirmDuty;
+    window.openPanel = openPanel;
 
-    // small accessibility: escape closes modal
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape') closeModal();
-    });
   </script>
 </body>
 </html>
